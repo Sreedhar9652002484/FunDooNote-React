@@ -1,0 +1,99 @@
+
+.center{
+   display: flex;
+   flex-direction: row;
+   justify-content: center;
+   
+}
+.container1{
+    margin-top: 20vh;
+    display: inline-block;
+     padding: 20px;
+     border: 1px solid #ccc;
+     border-radius: 8px;
+     box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.2);
+     padding-bottom: 5vh;
+
+ }
+.logo{
+    font-family: 'Arial', sans-serif;
+    font-size: 24px;
+    font-weight: bold;
+    color: red;
+    text-align: left;
+    padding: 20px;
+    display: flex;
+   justify-content: center;
+    padding-bottom: 10px;
+    letter-spacing: 3px;
+   
+  }
+.U{
+    color: yellow;
+  }
+  .N{
+    color: blue;
+  }
+  .D{
+    color: blueviolet;
+
+  }
+  .O{
+    color: chartreuse;
+  }
+.signin{
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+}
+#google{
+   margin-top: -1.5vh;
+}
+
+ .emailaddress{
+    padding: 2vh;
+    
+
+    
+ }
+ .pass{
+    margin-bottom: 3vh;
+   
+ }
+
+ #email1{
+    width: 50vh;
+ }
+ #password1{
+    width: 50vh;
+    
+ }
+ .error-message1{
+   color: red;
+   margin-top: -1vh;
+   text-align: center;
+
+ }
+ #button1{
+    margin-top: 2vh;
+    margin-left: 23vh;
+    background-color: rgba(0, 0, 255, 0.619);
+    color: white;
+
+ }
+ #link1{
+    padding-left: 3vh;
+    text-decoration: none;
+ }
+ #link2{
+    padding-left: 19vh;
+    text-decoration: none;
+ }
+ #submit{
+   text-align: center;
+   color: rgb(118, 195, 2);
+ }
+
+
+
+ 
