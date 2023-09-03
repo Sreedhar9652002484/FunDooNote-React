@@ -1,113 +1,221 @@
+*{
+  margin: 0;
+  padding: 0;
+  font-family:'Poppins', sans-serif;
+  box-sizing: border-box;
+}
+header{
 
-.img{
+width: 100vw;
+height: 100vh;
+display: flex;
+justify-content: center;
+align-items: center;
+}
+.imgform{
+  max-width: 1000px;
+  max-height: 600px;
+  border: 1px solid black;
   display: flex;
-  flex-direction: row; 
-  margin-left: 40vh
-  
-  
+  justify-content: space-between;
+  align-items: flex-start;
+  padding: 3rem;
+}
+.leftcontainer{
+ flex-basis: 50%;
+}
+.right{
+  flex-basis: 50%;
+}
+.registerform{
+
+  display: flex;
+  flex-direction: column;
+  width: auto;
+  justify-content: space-between;
+  gap: 1rem;
+}
+.form-container {
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  gap: 0.5rem; 
 }
 #img1{
-  height: 60vh;
-  margin-top: 15vh;
-  margin-left: 20vh;
-  
-}
-.container{
-   margin-top: 15vh;
-   display: inline-block;
-    padding: 50px;
-    border: 1px solid #ccc;
-    border-radius: 8px;
-    box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.2);
-  
+  width: 100%;
+  height: 100%;
+  padding: 3rem;
 }
 .logo {
-    font-family: 'Arial', sans-serif;
-    font-size: 25px;
-    font-weight: bolder;
-    color: red;
-    text-align: left;
-    padding: 20px;
-    padding-bottom: 10px;
-    letter-spacing: 5px;
-    animation: zoomIn 3s ease-in-out forwards;;
+  width: 0;
+  font-family: 'Arial', sans-serif;
+  font-size: 1.4rem;
+  font-weight: bold;
+  color: red;
+  letter-spacing: 6px;
+  animation: zoomIn 3s ease-in-out forwards;
+  ;
+}
+
+@keyframes zoomIn {
+  0% {
+    transform: scale(1);
+    opacity: 0;
   }
-  @keyframes zoomIn {
-    0% {
-      transform: scale(1);
-      opacity: 0;
-    }
-    100% {
-      transform: scale(1.2);
-      opacity: 1;
-    }
+
+  100% {
+    transform: scale(1.2);
+    opacity: 1;
+  }
+}
+#create {
+  font-family: 'Roboto', sans-serif; 
+}
+
+.logo .U {
+  color: rgb(223, 247, 10);
+}
+
+.logo .N {
+  color: blue;
+}
+
+.logo .D {
+  color: blueviolet;
+
+}
+.logo .O {
+  color: chartreuse;
+}
+.firstlast{
+  display: flex;
+  gap: 0.2rem;
+}
+.passconfirm{
+  display: flex;
+  gap: 0.2rem;
+}
+.error-message {
+  color: red;
+  text-align: center;
+  margin-top: 0.5rem;
+  
+}
+#button {
+  margin-top: 2vh;
+  margin-left: 10vh;
+}
+.buttondiv {
+  display: flex;
+  flex-direction: row;
+}
+
+#link3 {
+  padding: 2vh;
+  text-decoration: none;
+  cursor: pointer;
+}
+#submit {
+  margin-top: 1.5rem;
+  text-align: center;
+  color: rgb(118, 195, 2);
+}
+
+@media screen and (max-width: 1190px) {
+ 
+  #firstname,
+  #lastname,
+  #password,
+  #confirmpass {
+    width: 100%; 
+  }
+  #email{
+    width: 100%;
+  }
+  #img1{
+width: 100%;
+height: 100%;
+  }
+  .imgform{
+    width: 80%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+}
+@media screen and (max-width: 550px){
+  body {
+    margin: 3vw;
+  }
+  #img1{
+    display: none;
+  }
+  #firstname,
+  #lastname,
+  #password,
+#email,
+  #confirmpass {
+    width: 55vh;
+  }
+
+
+.firstname, .password{
+  margin-bottom: 1vh;
+}
+  .firstlast, .passconfirm{
+    display: flex;
+    flex-direction: column;
+ 
+  }
+  .imgform{
+    border: none;
+  }
+  .registerform{
+    width: 100%;
+   
+  }
+  #passpara{
+    width: 80%;
   }
   #create{
-    text-align: center;
-    font-family: 'Roboto', sans-serif;
-
+    font-size: 1.2rem;
   }
-.U{
-    color: rgb(223, 247, 10);
-  }
-  .N{
-    color: blue;
-  }
-  .D{
-    color: blueviolet;
-
-  }
-  .O{
-    color: chartreuse;
-  }
-.name{
-   display: flex;
-   flex-direction: row;
+  .container{
+    width: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
    justify-content: center;
-   padding-top: 20px;
+  }
 }
-.firstname{
-    margin-right: 10px;
-}
-.lastname{
-    margin-left: 10px;
-}
-.email{
-    margin-top: 2vh;
-    margin-bottom: 2vh;
-}
-#email{
-    width: 62vh;
-}
-.pass{
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
- }
- .password{
-     margin-right: 10px;
-     
- }
- .confirmpass{
-     margin-left: 10px;
- }
- .error-message{
-  color: red;
+@media screen and (max-width: 400px){
+  #create {
+    font-size: 1rem;
+  }
+  #passpara{
+    width: 80%;
+    margin: auto;
+  }
+  .container{
+    width: 80%;
+    margin: auto;
 
-  text-align: center;
- }
-#button{
-    margin-top: 2vh;
-    margin-left: 10vh;
-}
-.buttondiv{
+  }
+  .buttondiv {
     display: flex;
-    flex-direction: row;
-    justify-content: center;
-}
-#link{
-    margin-right:10vh;
-    padding: 2vh;
-    text-decoration: none;
-    cursor: pointer;
+    flex-direction: column;
+    align-items: center;
+  }
+  #button{
+    margin: auto;
+  }
+  #link3{
+    margin: auto;
+
+  }
+  #passpara{
+    width: 95%;
+  } 
 }
