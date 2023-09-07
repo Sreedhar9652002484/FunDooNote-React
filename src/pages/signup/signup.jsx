@@ -6,6 +6,7 @@ import { Link } from 'react-router-dom'; // Import Link
 import LoginImg from '../../assests/Login1.png';
 import Checkbox from '@mui/material/Checkbox';
 import FormControlLabel from '@mui/material/FormControlLabel';
+import { signup } from "../../Services/dataservice/userservices";
 
 
 const SignupForm = () => {
@@ -100,20 +101,23 @@ const SignupForm = () => {
         SetUserDetails({ ...userDetails, isShowPassword: !userDetails.isShowPassword })
     };
 
-    const handleSubmit = (event) => {
+    const handleSubmit = async (event) => {
         event.preventDefault();
 
         ////Checking All Fields Are true
         if (userDetails.isValidFName && userDetails.isValidLName && userDetails.isValidEmail && userDetails.isValidPass && userDetails.isValidConfirm) {
             SetUserDetails({ ...userDetails, isSubmitted: true });
             console.log(userDetails);
-            setTimeout(() => {
-                window.location.reload();
-            }, 3000)
+            // setTimeout(() => {
+            //     window.location.reload();
+            // }, 3000)
+            let response = await signup(userDetails);
+            localStorage.setItem("token", response.data.data.id);
+            console.log(response);
         }
     }
     return (
-        <header>
+        <div className="main">
             <div className="imgform">
                 <div className="leftcontainer">
                     <form className="form" onSubmit={handleSubmit}>
@@ -180,8 +184,8 @@ const SignupForm = () => {
                             </div>
 
                             <div className="buttondiv">
-                                <Link to="/signin" id="link3">Sign In instead</Link> {/* Use Link */}
-                                <Button id="button" variant="contained" type="submit" /*disabled={userDetails.isSubmitted}*/>Register</Button>
+                                <Link to="/" id="link3">Sign In instead</Link> {/* Use Link */}
+                                <Button id="button" variant="contained" type="submit" onClick={handleSubmit}>Register</Button>
                             </div>
                         </div>
                         {userDetails.isSubmitted && <p id="submit">Registered successfully!</p>}
@@ -191,7 +195,7 @@ const SignupForm = () => {
                     <img src={LoginImg} id="img1" alt="login" />
                 </div>
             </div>
-        </header>
+        </div>
     );
 
 }

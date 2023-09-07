@@ -1,29 +1,19 @@
 *{
-   margin: 0;
-   padding: 0;
+   margin: auto;
+   padding: auto;
    font-family:'Poppins', sans-serif;
-   box-sizing: border-box;
  }
- header{
 
- width: 100vw;
- height: 100vh;
- display: flex;
- justify-content: center;
- align-items: center;
- }
 .container1{
-
-  
+   margin-top: 15vh;
+ 
    display: flex;
    justify-content: center;
- 
-   
+   align-items: center;
 
  }
  .container2{
-  
-   height: 100%;
+
    border: 1px solid black;
    padding: 5vh;
 
