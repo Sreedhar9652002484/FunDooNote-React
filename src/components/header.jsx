@@ -29,7 +29,8 @@ import CreateOutlinedIcon from '@mui/icons-material/CreateOutlined';
 import RefreshIcon from '@mui/icons-material/Refresh';
 import { grey } from '@mui/material/colors';
 import Icon from '../assests/Google Keep.png'
-
+import { Navigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 
 
@@ -166,16 +167,13 @@ export default function MiniDrawer() {
     },
   }));
 
+  const navigate = useNavigate();
   const SignoutHandler=()=>{
     if(localStorage.key){
       localStorage.removeItem('token');
+      navigate("/");
     }
-     setTimeout(() => {
-                window.location.reload();
-            },1000)
   }
-
-
     const [isRefreshing, setIsRefreshing] = React.useState(false);
   
     const HanldeRefresh=()=>{

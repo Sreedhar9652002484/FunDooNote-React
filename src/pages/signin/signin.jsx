@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import '../signin/signin.css';
-import { Link } from 'react-router-dom'; // Import Link
+import { Link, useNavigate } from 'react-router-dom'; // Import Link
 import axios from "axios";
 import '../../Services/dataservice/userservices'
 import { signin } from "../../Services/dataservice/userservices";
@@ -29,8 +29,6 @@ const SigninForm = () => {
     const isEmailValid = /^[a-zA-Z0-9._:$!%-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]+$/;
     const isPassValid = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
 
-
-
     const handleEmail = (e) => {
         const newValue = e.target.value;
         setUser({ ...user, email: newValue, isvalidEmail: isEmailValid.test(newValue) });
@@ -55,39 +53,24 @@ const SigninForm = () => {
     }
 
 
-        
+    const navigate = useNavigate();
 
-    const handleSubmit = async(event) => {
-
-       event.preventDefault();
+    const handleSubmit = async (event) => {
+        event.preventDefault();
         if (user.isvalidEmail && user.isvalidPass) {
-            setUser({ ...user, isSubmitted: true });
-             console.log(user);
-            let response=await signin(user);
-            localStorage.setItem("token", response?.data.data);
-            console.log(response)  
+          setUser({ ...user, isSubmitted: true });
+          console.log(user);
+          let response = await signin(user);
+          localStorage.setItem("token", response?.data.data);
+          console.log(response);
+          let mytoken=localStorage.getItem('token');
+          if (mytoken!=null) {
           
-            setTimeout(() => {
-                window.location.reload();
-             },2000)
-              
+            navigate("/dashboard");
+          }
+        }
     }
-        
 
-
-
-        // if(user.isSubmitted){
-        //     alert("Login Suuccessfully")
-        // }
-
-        // useEffect ( (data)=>{
-        // } , getToken() );
-        // const getToken( (data)=>{
-        //    let  res = axios.get("url");
-        //    let token=res.data.Token;
-        // } );
-
-    };
     return (
        <div className="main">
             <div className="container1">
@@ -126,15 +109,15 @@ const SigninForm = () => {
                             </div>
                         </div>
 
-                    </form>   {user.isSubmitted && <p id="submit1">Login successfully!</p>}
+                    </form>   {user.isSubmitted && <p id="submit1">Login successfully please wait....!</p>}
                 </div>
 
             </div>
             </div>
         
-
+    
 
     );
 }
 
-export default SigninForm
+export default SigninForm;

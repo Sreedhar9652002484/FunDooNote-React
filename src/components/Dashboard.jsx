@@ -8,8 +8,9 @@ import TakeNote from './TakeNote1/takenote1'
 function Dashboard() {
   return (
     <div>
-        {/* <NavDrawer/> */}
+      
         <MenuAppBar/>
+        <TakeNote/>
        
     </div>
     

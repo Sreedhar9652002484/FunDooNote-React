@@ -11,9 +11,7 @@ import ListItemText from '@mui/material/ListItemText';
 import InboxIcon from '@mui/icons-material/MoveToInbox';
 import MailIcon from '@mui/icons-material/Mail';
 import MyAppBar from './header';
-
-
-
+import MiniDrawer from './header';
 
 export default function NavDrawer({isOpen, handleToggleDrawerOpen}) {
   const [state, setState] = React.useState({
