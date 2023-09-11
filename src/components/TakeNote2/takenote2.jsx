@@ -6,30 +6,36 @@ import TextField from '@mui/material/TextField';
 import { margin } from '@mui/system';
 import { useState } from 'react';
 import { Button, IconButton } from '@mui/material';
-import { ArchiveOutlined, ColorLensOutlined, ImageOutlined, More, MoreVertOutlined, NotificationAddOutlined, PushPinOutlined, RedoOutlined, UndoOutlined } from '@mui/icons-material';
-import TakeNote1 from '../icons';
-import { SendNote } from '../TakeNote3/takenote3';
-import { sendDataNote } from '../../Services/dataservice/userservices';
+import { ArchiveOutlined, ColorLensOutlined, Dashboard, ImageOutlined, More, MoreVertOutlined, NotificationAddOutlined, PushPinOutlined, RedoOutlined, UndoOutlined } from '@mui/icons-material';
+
+import SimplePaper, { SendNote } from '../TakeNote3/takenote3';
+import { sendDataNote } from '../../Services/dataservice/noteservices';
+import { json } from 'react-router-dom';
+import TakeNote3 from '../TakeNote3/takenote3';
+import TakeNote1 from '../TakeNote1/takenote1';
 
 
-export default function TakeNote2() {
+export default function TakeNote2({handleCloseprop}) {
   const [isEditing, setIsEditing] = useState(false);
   const [input, setInputValue] = useState({
     title:'',
     takeaNote:'',
    } );
+
+   const [jwtToken, setJwtToken] = useState('');
+
+   React.useEffect(() => {
+     const token = localStorage.getItem('token');
+     if (token) {
+       setJwtToken(token);
+     }
+   }, []);
+
   // const [inputValue2, setInputValue2] = useState('');
 
-  const [cursor, isCursor] = React.useState(false);
+ // const [cursor, setCursor] = React.useState(false);
   const[close, setClose]=React.useState(true)
 
-  const handleCursor = () => {
-    isCursor(true);
-  };
-
-  const handleTextClick = () => {
-    setIsEditing(true);
-  };
 
   const handleInputChange1 = (e) => {
     const value=e.target.value;
@@ -49,20 +55,37 @@ const handlesubmit=()=>{
   const handleInputBlur = () => {
     setIsEditing(true);
   };
+ 
+
+  const [senddata, setSendData] = useState([]); 
+// const senddata = [];
+
+ //close hanlder
   const handleClose=async(event)=>{
-    //handlesubmit();
-    console.log(true);
-    const token=localStorage.getItem('token')
-    console.log(token);
-    let response=await sendDataNote(input, token)
-    console.log(response);
-    
-    
-  
-  }
+    try {
+      const response = await sendDataNote(input);
+      console.log(response);
+      const newdata= response.data.data;
+     const updatedSendData = [...senddata, newdata];
+      setSendData(updatedSendData);
+   
+      setInputValue({
+        title: '',
+        takeaNote: '',
+      });
+      handleCloseprop();
+    } 
+    catch(error) {
+      console.error('Error:', error);
+    }  
+  };
+  React.useEffect(() => {
+    console.log("SendData Array:", senddata);
+  }, [senddata]); // Log senddata whenever it changes
 
   return (
-  
+  <>
+    {/* {cursor?<Dashboard onClick={handleCloseprop}/>:( */}
 
     <Box 
       sx={{
@@ -71,12 +94,13 @@ const handlesubmit=()=>{
         justifyContent: 'center',
         
       }}
+
     >
-      <Paper 
+
+      <Paper  
+      
         sx={{
           width:'80ch',
-      
-
           display: 'flex',
           flexDirection: 'column',
           alignItems: 'left',
@@ -166,11 +190,19 @@ const handlesubmit=()=>{
           >
             Close
           </Button>
+        
         </div>
         
       </Paper>
      
+    </Box> 
      
-    </Box>
+     {/* )} */}
+     <Dashboard senddata={senddata} />
+   
+    </>
   );
+ 
 }
+
+

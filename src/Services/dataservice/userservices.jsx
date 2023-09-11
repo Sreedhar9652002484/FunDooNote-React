@@ -12,22 +12,24 @@ export const signup=async (obj)=>{
 };
 
 
-export const sendDataNote=async(obj, JWTToken)=>{
-    console.log("Object",obj)
-    let response=await axios.post('https://srifundoowebapp.azurewebsites.net/api/Notes/CreatingNote', obj, JWTToken,{
-        headers: {
-            'Content-Type': 'application/json',
-            'Origin': 'http://localhost:3000'
-        }
-    })
-    .then(response => {
-        return response;
-    })
-    .catch(error => {
-       
-    });
+// export const sendDataNote=async(obj, JWTToken)=>{
+//     console.log("Object",obj)
+//     let response = await axios.post('https://localhost:44371/api/Notes/CreatingNote', obj, {
+//         headers: {
+//             'Content-Type': 'application/json',
+//             'Authorization': `Bearer ${JWTToken}`, // Set the JWT token here
+//         }
+//     })
+//     .then(response => {
+//         return response;
+//     })
+//     .catch(error => {
+//         // Handle errors here
+//     });
     
-    console.log('trueresponse');
-        // 'https://srifundoowebapp.azurewebsites.net/api/Notes/CreatingNote', obj, JWTToken)
+    
+//     console.log('trueresponse');
+//         // 'https://srifundoowebapp.azurewebsites.net/api/Notes/CreatingNote', obj, JWTToken)
    
-}
+// }
+

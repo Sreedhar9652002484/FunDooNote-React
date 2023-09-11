@@ -9,7 +9,9 @@ import Icons from '../icons';
 import { BrushOutlined, CheckBoxOutlined, ChecklistOutlined, ImageOutlined } from '@mui/icons-material';
 
 export default function TakeNote1() {
-const [cursor, setCursor]=React.useState(false);
+const [showNote, setNote]=React.useState(false);
+
+
 // const [isEditing, setIsEditing] = useState(false);
 
 // const handleEditing=(){
@@ -24,10 +26,20 @@ const [cursor, setCursor]=React.useState(false);
 //   setCursor(false);
 // };
 const handleCursor=()=>{
-  setCursor(true);
+  
+  setNote(true);
 }
 
+// const stopPropagation=(e)=>{
+//   e.stopPropagation();
+// }
+
+//console.log("cursor:-",showNote);
+
+
   return (
+    // <div  style={{backgroundColor:'black', width:'100%', height:'100vh'}}>
+    
     <Box
       sx={{
         display: 'flex',
@@ -41,12 +53,12 @@ const handleCursor=()=>{
       }}
     > 
      <Paper elevation={3}  onClick={handleCursor}>
-        {cursor ? (
+        {/* {showNote ? (
           <>
           <TakeNote2/>
         
         </>
-        ) : (
+        ) : ( */}
           <div
             style={{
               cursor: 'text',
@@ -57,6 +69,7 @@ const handleCursor=()=>{
               justifyContent:'space-between',
 
             }}
+            // onClick={stopPropagation}
            
           >
             
@@ -69,8 +82,9 @@ const handleCursor=()=>{
           </div>
 
           
-        )}
+         {/* )}  */}
       </Paper>
     </Box>
+    // </div>
   );
 }
