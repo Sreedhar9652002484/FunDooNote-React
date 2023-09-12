@@ -31,6 +31,7 @@ import { grey } from '@mui/material/colors';
 import Icon from '../assests/Google Keep.png'
 import { Navigate } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
+import Dashboard from './Dashboard';
 
 
 
@@ -101,7 +102,9 @@ const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'close'
   }),
 );
 
-export default function MiniDrawer() {
+
+////Function Starting....
+export default function MiniDrawer({handleforAll, handleArchive, handleallNotes}) {
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
 
@@ -184,9 +187,26 @@ export default function MiniDrawer() {
   }, 1000)
 }
 
-const media= {medium: '@media (min-width: 601px) and (max-width: 1024px)'}
+const [clicked, setClicked]=React.useState(false)
+const handlecolor=()=>{
+  setClicked(!clicked);
+}
 
-  
+const [dashboard, setDashboard]=React.useState(false);
+const showtrashnotes=()=>{
+  // setDashboard(!dashboard);
+  handleforAll(!dashboard);
+
+}
+const [openNote, setOpenNote]=React.useState(true);
+const showAllNotes=()=>{
+  handleallNotes(!openNote)
+}
+const [archive, setArchive]=React.useState(false)
+const ShowArchiveNotes=()=>{
+  handleArchive(!archive)
+
+}
 
   return (
     <Box sx={{ display: 'flex' }}>
@@ -201,11 +221,8 @@ const media= {medium: '@media (min-width: 601px) and (max-width: 1024px)'}
             edge="start"
             sx={{
               marginRight: 5,
-            }}
-            
-           
+            }} 
           >
-            
             <MenuIcon />
           </IconButton>
           <img src={Icon} alt='logo'/>
@@ -265,7 +282,6 @@ const media= {medium: '@media (min-width: 601px) and (max-width: 1024px)'}
                 <MenuItem onClick={SignoutHandler}>SignOut</MenuItem>
               </Menu>
               </div>
-             
           
         </Toolbar>
       </AppBar>
@@ -276,17 +292,17 @@ const media= {medium: '@media (min-width: 601px) and (max-width: 1024px)'}
           </IconButton>
         </DrawerHeader>
         <Divider />
-        <List>
+        <List >
           {['Notes', 'Remainder', 'Edit Label', 'Archive', 'Trash'].map((text, index) => (
             <ListItem key={text} disablePadding sx={{ display: 'block' }}>
-              <ListItemButton
+              <ListItemButton 
                 sx={{
                   minHeight: 48,
                   justifyContent: open ? 'initial' : 'center',
                   px: 2.5,
                 }}
               >
-                <ListItemIcon
+                <ListItemIcon 
                   sx={{
                     minWidth: 0,
                     mr: open ? 3 : 'auto',
@@ -294,24 +310,31 @@ const media= {medium: '@media (min-width: 601px) and (max-width: 1024px)'}
                   }}
                 >
                   {index % 5 === 0 ? (
-                    <LightbulbOutlinedIcon />
+                    <IconButton onClick={showAllNotes}> <LightbulbOutlinedIcon /></IconButton>
+                   
                   ) : (
                     index % 4 === 0 ? (
-                      <DeleteForever />
+                      <IconButton onClick={showtrashnotes} >
+                        {dashboard ? <MiniDrawer/>:''}
+                         <DeleteForever  /></IconButton>
+                     
                     ) : (
                        index%2==0?(
-                        <CreateOutlinedIcon />
+                        <IconButton> <CreateOutlinedIcon /></IconButton>
+                       
                       ) : (
                         index%3==0?(
-                          <ArchiveOutlined  />
+                          <IconButton onClick={ShowArchiveNotes}> <ArchiveOutlined  /></IconButton>
+                         
                         ) : (
-                          <NotificationsOutlined/>
+                          <IconButton> <NotificationsOutlined/></IconButton>
+                         
                         )
                       )
                     )
                   )}
                 </ListItemIcon>
-                <ListItemText primary={text} sx={{ opacity: open ? 1 : 0 }} />
+                <ListItemText primary={text} sx={{ opacity: open ? 1 : 0 }} onClick={handlecolor} style={{color:clicked?'orange':''}} />
               </ListItemButton>
             </ListItem>
           ))}

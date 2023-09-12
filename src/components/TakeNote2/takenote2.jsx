@@ -117,7 +117,7 @@ const handlesubmit=()=>{
             marginBottom: '10px', // Add some margin for spacing
           }}>
         <TextField
-          
+        required
           variant='standard'
           placeholder="Title..."
           value={input.title}
@@ -139,6 +139,7 @@ const handlesubmit=()=>{
         </div>
         <TextField
           multiline
+          required
           variant='standard'
           placeholder="Take a note..."
           value={input.takeaNote}

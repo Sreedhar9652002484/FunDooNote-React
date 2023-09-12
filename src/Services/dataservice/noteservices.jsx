@@ -50,15 +50,35 @@ export const sendDataNote = async (obj) => {
   }
 };
 
-export const deleteNote=async(notesId)=>{
+export const deleteNote=async(noteId)=>{
   try{
-    const response=await axios.delete('https://srifundoowebapp.azurewebsites.net/api/Notes/DeleteNote',{
+    console.log(noteId);
+    const response=await axios.post(`https://srifundoowebapp.azurewebsites.net/api/Notes/Trash?NotesId=${noteId}`,{},{
       headers: {
         'Content-Type': 'application/json',
         'Authorization': `Bearer ${JWTToken}`, 
       }
 
-    } )
+    })
+    return response;
+  }
+  catch (error) {
+    console.error(error);
+    return error;
+  }
+};
+
+
+export const archiveNotes=async(noteId)=>{
+  try{
+    console.log(noteId);
+    const response=await axios.post(`https://srifundoowebapp.azurewebsites.net/api/Notes/Trash?NotesId=${noteId}`,{},{
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${JWTToken}`, 
+      }
+
+    })
     return response;
   }
   catch (error) {
