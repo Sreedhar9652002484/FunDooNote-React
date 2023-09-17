@@ -12,29 +12,10 @@ export default function TakeNote1() {
 const [showNote, setNote]=React.useState(false);
 
 
-// const [isEditing, setIsEditing] = useState(false);
-
-// const handleEditing=(){
-//   setIsEditing(true)
-// }
-
-// const handleMouseEnter = () => {
-//   setCursor(true);
-// };
-
-// const handleMouseLeave = () => {
-//   setCursor(false);
-// };
 const handleCursor=()=>{
-  
   setNote(true);
 }
 
-// const stopPropagation=(e)=>{
-//   e.stopPropagation();
-// }
-
-//console.log("cursor:-",showNote);
 
 
   return (

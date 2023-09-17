@@ -4,47 +4,15 @@ import Paper from '@mui/material/Paper';
 import { IconButton, Typography } from '@mui/material';
 import TakeNote2 from '../TakeNote2/takenote2';
 import { ArchiveOutlined, ColorLensOutlined, DeleteForeverOutlined, ImageOutlined, MoreVertOutlined, NotificationsOutlined, PushPinOutlined, UndoOutlined } from '@mui/icons-material';
-import { Mycontext } from '../../Services/dataservice/usecontext';
 import { archiveNotes, deleteNote } from '../../Services/dataservice/noteservices';
 
-export default function TakeNote3({ getall, onResponseData, handleArchiveData }) {
+export default function TakeNote3({ getall, handleTrashProp,handleArchiveProp }) {
 
   console.log("getall data:", getall);
   console.log(typeof (getall));
 
   if(getall==null){
 console.log("nullll");
-  }
-  //delete notes
-  const [open, setOpen] = React.useState(false)
-  const [del, setDelete] = React.useState(false);
-  const [noteid, setNoteId] = React.useState(0);
-
-
-  //Trash
-  const handleDelete = async() => {
-    const noteId = getall.notesId;
-    try{
-      let response = await deleteNote(noteId);
-      const deletedata=response.data.success
-      onResponseData(deletedata);
-    }catch(error){
-      console.log(error);
-    }
-  }
-
-  //archive
-  const handleArchive = async()=>{
-    const noteId=getall.notesId;
-    try{
-      let response=await archiveNotes(noteId);
-      const archivedata=response.data.success
-      handleArchiveData(archivedata);
-      console.log("archive",archivedata);
-
-    }catch(error){
-      console.log(error);
-    }
   }
 
 const [opennote2, setOpennNote2]=React.useState(false);
@@ -53,6 +21,15 @@ const handleOpenNote2=()=>{
   setOpennNote2(!opennote2);
 }
 
+const handleTrashClick=()=>{
+  const noteId=getall.notesId;
+  handleTrashProp(noteId);
+
+}
+const handleArchiveClick=()=>{
+  const noteId=getall.notesId
+  handleArchiveProp(noteId);
+}
   return (
 
 
@@ -92,10 +69,10 @@ const handleOpenNote2=()=>{
             <IconButton aria-label="Image">
               <ImageOutlined />
             </IconButton>
-            <IconButton aria-label="Archive" onClick={handleArchive}>
+            <IconButton aria-label="Archive" onClick={handleArchiveClick} >
               <ArchiveOutlined />
             </IconButton>
-            <IconButton aria-label="More Options" onClick={handleDelete}>
+            <IconButton aria-label="More Options " onClick={handleTrashClick}>
               <DeleteForeverOutlined />
             </IconButton>
           </div>

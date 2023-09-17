@@ -104,7 +104,7 @@ const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'close'
 
 
 ////Function Starting....
-export default function MiniDrawer({handleforAll, handleArchive, handleallNotes}) {
+export default function MiniDrawer({handleShowAllNotes, handleArchiveNotes, handleTrashNotes}) {
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
 
@@ -185,27 +185,6 @@ export default function MiniDrawer({handleforAll, handleArchive, handleallNotes}
       window.location.reload();
       setIsRefreshing(false);
   }, 1000)
-}
-
-const [clicked, setClicked]=React.useState(false)
-const handlecolor=()=>{
-  setClicked(!clicked);
-}
-
-const [dashboard, setDashboard]=React.useState(false);
-const showtrashnotes=()=>{
-  // setDashboard(!dashboard);
-  handleforAll(!dashboard);
-
-}
-const [openNote, setOpenNote]=React.useState(true);
-const showAllNotes=()=>{
-  handleallNotes(!openNote)
-}
-const [archive, setArchive]=React.useState(false)
-const ShowArchiveNotes=()=>{
-  handleArchive(!archive)
-
 }
 
   return (
@@ -295,13 +274,25 @@ const ShowArchiveNotes=()=>{
         <List >
           {['Notes', 'Remainder', 'Edit Label', 'Archive', 'Trash'].map((text, index) => (
             <ListItem key={text} disablePadding sx={{ display: 'block' }}>
+             
+                
               <ListItemButton 
                 sx={{
                   minHeight: 48,
                   justifyContent: open ? 'initial' : 'center',
                   px: 2.5,
                 }}
+                onClick={()=>{
+                  if(text==='Notes'){
+                    handleShowAllNotes();
+                  }else if(text==='Archive'){
+                    handleArchiveNotes();
+                  }else if(text==='Trash'){
+                    handleTrashNotes();
+                  }
+                }}
               >
+
                 <ListItemIcon 
                   sx={{
                     minWidth: 0,
@@ -310,12 +301,11 @@ const ShowArchiveNotes=()=>{
                   }}
                 >
                   {index % 5 === 0 ? (
-                    <IconButton onClick={showAllNotes}> <LightbulbOutlinedIcon /></IconButton>
+                    <IconButton ><LightbulbOutlinedIcon /></IconButton>
                    
                   ) : (
                     index % 4 === 0 ? (
-                      <IconButton onClick={showtrashnotes} >
-                        {dashboard ? <MiniDrawer/>:''}
+                      <IconButton  >
                          <DeleteForever  /></IconButton>
                      
                     ) : (
@@ -324,7 +314,7 @@ const ShowArchiveNotes=()=>{
                        
                       ) : (
                         index%3==0?(
-                          <IconButton onClick={ShowArchiveNotes}> <ArchiveOutlined  /></IconButton>
+                          <IconButton > <ArchiveOutlined  /></IconButton>
                          
                         ) : (
                           <IconButton> <NotificationsOutlined/></IconButton>
@@ -334,7 +324,7 @@ const ShowArchiveNotes=()=>{
                     )
                   )}
                 </ListItemIcon>
-                <ListItemText primary={text} sx={{ opacity: open ? 1 : 0 }} onClick={handlecolor} style={{color:clicked?'orange':''}} />
+                <ListItemText primary={text} sx={{ opacity: open ? 1 : 0 }} />
               </ListItemButton>
             </ListItem>
           ))}
